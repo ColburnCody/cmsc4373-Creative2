@@ -5,6 +5,7 @@ import * as FirebaseController from '../controller/firebase_controller.js'
 import * as Constant from '../model/constant.js'
 import { Reply } from '../model/reply.js'
 import * as Route from '../controller/route.js'
+import * as EditThread from '../controller/edit_thread.js'
 
 export function addViewButtonListener() {
     const viewButtonForms = document.getElementsByClassName('thread-view-form');
@@ -58,12 +59,20 @@ export async function thread_page(threadId) {
         return;
     }
 
-    let html = `
+    let html = Auth.currentUser.email != thread.email ? `
         <h4 class="bg-primary text-white">${thread.title}</h4>
         <div>${thread.email} (At ${new Date(thread.timestamp).toString()}</div>
         <div class="bg-secondary text-white">${thread.content}</div>
         <hr>
-    `;
+    ` : `
+    <h4 class="bg-primary text-white">${thread.title}</h4>
+    <div>${thread.email} (At ${new Date(thread.timestamp).toString()}</div>
+    <div class="bg-secondary text-white">${thread.content}</div>
+    <div>
+    <button id="button-edit-thread" class="btn btn-outline-info">Edit</button>
+    <button id="button-delete-thread" class="btn btn-outline-danger">Delete</button></div>
+    <hr>
+`;
 
     html += '<div id="message-reply-body">'
     // display all replies
@@ -82,6 +91,17 @@ export async function thread_page(threadId) {
             <button id="button-add-new-reply" class="btn btn-outline-info">Post reply</button>
         </div>
     `;
+
+    const editThread = document.getElementsByClassName('form-edit-thread');
+    for (let i = 0; i < editThread.length; i++) {
+        editThread[i].addEventListener('submit', async e => {
+            e.preventDefault();
+            const button = e.target.getElementsByTagName('button')[0];
+            const label = Util.disableButton(button)
+            await EditThread.edit_thread(e.target.threadId.value)
+            Util.enableButton(button, label);
+        })
+    }
 
     Element.root.innerHTML = html;
 
