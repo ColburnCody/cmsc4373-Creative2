@@ -31,10 +31,6 @@ textarea {
     min-height: 150px;
 }
 
-.form-create-thread-error{
-    color: red;
-}
-
-.create-account-error{
+.my-error{
     color: red;
 }

@@ -65,16 +65,16 @@
                     <form id="form-create-thread">
                         <div>
                             <input type="text" name="title" placeholder="title of the thread" />
-                            <p class="form-create-thread-error" id="form-create-thread-error-title"></p>
+                            <p class="my-error" id="form-create-thread-error-title"></p>
                         </div>
                         <div>
                             <input type="text" name="keywords" placeholder="search keys separated by a blank" />
-                            <p class="form-create-thread-error" id="form-create-thread-error-keywords"></p>
+                            <p class="my-error" id="form-create-thread-error-keywords"></p>
                         </div>
                         <div>
                             <textarea name="content" cols="50" rows="5"
                                 placeholder="Enter content of the thread"></textarea>
-                            <p class="form-create-thread-error" id="form-create-thread-error-content"></p>
+                            <p class="my-error" id="form-create-thread-error-content"></p>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-outline-primary">Create</button>
@@ -84,6 +84,7 @@
             </div>
         </div>
     </div>
+
     <!-- modal: info box -->
     <div class="modal fade" id="modal-infobox" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modal-infobox-title" aria-hidden="true">
@@ -97,6 +98,38 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Edit thread -->
+    <div class="modal fade" id="modal-edit-thread" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modal-edit-thread-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-edit-thread-title">Edit Thread</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-edit-thread" method="post">
+                        <input type="hidden" name="threadId" />
+                        <div>
+                            Title: <input type="text" name="title" />
+                            <p id="form-edit-thread-title-error" class="my-error" </div>
+                            <div>
+                                Keywords: <input type="text" name="keywords" />
+                                <p id="form-edit-thread-keyword-error" class="my-error"></p>
+                            </div>
+                            <div>
+                                Content:<br><textarea name="content"></textarea>
+                                <p id="form-edit-thread-content-error" class="my-error"></p>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-outline-primary">Update</button>
+                            </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -141,15 +174,15 @@
                     <form id="form-create-account">
                         <div>
                             <input type="email" name="email" placeholder="email address">
-                            <p id="create-account-error-email" class="create-account-error"></p>
+                            <p id="create-account-error-email" class="my-error"></p>
                         </div>
                         <div>
                             <input type="password" name="password" placeholder="password">
-                            <p id="create-account-error-password" class="create-account-error"></p>
+                            <p id="create-account-error-password" class="my-error"></p>
                         </div>
                         <div>
                             <input type="password" name="passwordConfirm" placeholder="confirm password">
-                            <p id="create-account-error-passwordConfirm" class="create-account-error"></p>
+                            <p id="create-account-error-passwordConfirm" class="my-error"></p>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-outline-primary">Create</button>
