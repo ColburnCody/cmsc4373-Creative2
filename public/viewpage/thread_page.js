@@ -92,18 +92,22 @@ export async function thread_page(threadId) {
         </div>
     `;
 
-    const editThread = document.getElementsByClassName('form-edit-thread');
-    for (let i = 0; i < editThread.length; i++) {
-        editThread[i].addEventListener('submit', async e => {
-            e.preventDefault();
-            const button = e.target.getElementsByTagName('button')[0];
-            const label = Util.disableButton(button)
-            await EditThread.edit_thread(e.target.threadId.value)
-            Util.enableButton(button, label);
-        })
-    }
-
     Element.root.innerHTML = html;
+
+    document.getElementById('button-edit-thread').addEventListener('click', async e => {
+        e.preventDefault();
+        const button = document.getElementById('button-edit-thread');
+        const label = Util.disableButton(button);
+        await EditThread.edit_thread(threadId)
+        Util.enableButton(button, label)
+    })
+
+    document.getElementById('button-delete-thread').addEventListener('click', async () => {
+        const button = document.getElementById('button-delete-thread');
+        const label = Util.disableButton(button)
+        if (!window.confirm("Press ok to delete the thread")) return;
+        Util.enableButton(button, label)
+    })
 
     document.getElementById('button-add-new-reply').addEventListener('click', async () => {
         const content = document.getElementById('textarea-add-new-reply').value;

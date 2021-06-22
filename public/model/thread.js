@@ -20,6 +20,14 @@ export class Thread {
         };
     }
 
+    serializeForUpdate() {
+        const t = {};
+        if (this.title) t.title = this.title;
+        if (this.keywordsArray) t.keywordsArray = this.keywordsArray;
+        if (this.content) t.content = this.content;
+        return t;
+    }
+
     validate_title() {
         if (this.title && this.title.length > 2) return null;
         return 'invalid: min length should be 3';

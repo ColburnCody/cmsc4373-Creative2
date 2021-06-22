@@ -68,3 +68,10 @@ export async function searchThreads(keywordsArray) {
 export async function createAccount(email, password) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
 }
+
+const cf_updateThread = firebase.functions().httpsCallable('cf_updateThread');
+export async function updateThread(thread) {
+    const threadId = thread.threadId;
+    const data = thread.serializeForUpdate();
+    await cf_updateThread({ threadId, data });
+}

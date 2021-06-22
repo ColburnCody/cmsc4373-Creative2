@@ -19,7 +19,7 @@ export const formCreateAccountError = {
     passwordConfirm: document.getElementById('create-account-error-passwordConfirm'),
 }
 export const formEditThread = {
-    form: document.getElementById('form-edit-thrad'),
+    form: document.getElementById('form-edit-thread'),
     errorTitle: document.getElementById('form-edit-thread-title-error'),
     errorKeywords: document.getElementById('form-edit-thread-keyword-error'),
     errorContent: document.getElementById('form-edit-thread-content-error'),
