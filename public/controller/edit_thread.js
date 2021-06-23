@@ -20,10 +20,9 @@ export function addEventListeners() {
 
         const t = new Thread({
             title: title,
-            keywordsArray: keywordsArray,
             content: content,
+            keywordsArray: keywordsArray,
         });
-        t.threadId = e.target.threadId.value;
 
         let valid = true;
         let error = t.validate_title();
@@ -45,6 +44,8 @@ export function addEventListeners() {
             Util.enableButton(button, label)
             return;
         }
+
+        t.threadId = e.target.threadId.value;
 
         try {
             await FirebaseController.updateThread(t);
@@ -81,5 +82,10 @@ export async function edit_thread(threadId) {
 }
 
 export async function delete_thread(threadId) {
-
+    try {
+        await FirebaseController.deleteThread(threadId);
+    } catch (e) {
+        if (Constant.DEV) console.log(e);
+        Util.info('Delete thread error', JSON.stringify(e));
+    }
 }

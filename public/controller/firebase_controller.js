@@ -71,7 +71,12 @@ export async function createAccount(email, password) {
 
 const cf_updateThread = firebase.functions().httpsCallable('cf_updateThread');
 export async function updateThread(thread) {
-    const threadId = thread.threadId;
+    threadId = thread.threadId;
     const data = thread.serializeForUpdate();
     await cf_updateThread({ threadId, data });
+}
+
+const cf_deleteThread = firebase.functions().httpsCallable('cf_deleteThread');
+export async function deleteThread(threadId) {
+    await cf_deleteThread(threadId);
 }

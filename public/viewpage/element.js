@@ -35,4 +35,4 @@ export const modalInfoboxTitleElement = document.getElementById('modal-infobox-t
 export const modalInfoboxBodyElement = document.getElementById('modal-infobox-body');
 export const modalCreateThread = new bootstrap.Modal(document.getElementById('modal-create-thread'), { backdrop: 'static' });
 export const modalCreateAccount = new bootstrap.Modal(document.getElementById('modal-create-account'), { backdrop: 'static' });
-export const modalEditThread = new bootstrap.Modal(document.getElementById('modal-edit-thread'), { backdrop: 'static' })
+export const modalEditThread = new bootstrap.Modal(document.getElementById('modal-edit-thread'), { backdrop: 'static' });

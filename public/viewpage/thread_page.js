@@ -103,10 +103,13 @@ export async function thread_page(threadId) {
     })
 
     document.getElementById('button-delete-thread').addEventListener('click', async () => {
-        const button = document.getElementById('button-delete-thread');
-        const label = Util.disableButton(button)
-        if (!window.confirm("Press ok to delete the thread")) return;
-        Util.enableButton(button, label)
+        if (!window.confirm("Press ok to delete the thread")) {
+            Util.enableButton(button, label)
+            return;
+        }
+        EditThread.delete_thread(threadId);
+        window.history.back();
+        Util.info('Deleted', 'Thread has been deleted');
     })
 
     document.getElementById('button-add-new-reply').addEventListener('click', async () => {
