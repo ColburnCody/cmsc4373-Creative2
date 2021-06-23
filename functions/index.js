@@ -16,6 +16,10 @@ exports.cf_deleteThread = functions.https.onCall(deleteThread);
 exports.cf_deleteUser = functions.https.onCall(deleteUser);
 
 async function deleteUser(data, context) {
+    if (!context.auth.token.email) {
+        if (Constant.DEV) console.log('Not allowed');
+        throw new functions.https.HttpsError('unauthenticated', 'User does not have the authentication for this action');
+    }
     try {
         await admin.auth().deleteUser(data);
     } catch (e) {
@@ -26,6 +30,10 @@ async function deleteUser(data, context) {
 
 
 async function updateThread(threadInfo, context) {
+    if (!context.auth.token.email) {
+        if (Constant.DEV) console.log('Not allowed');
+        throw new functions.https.HttpsError('unauthenticated', 'User does not have the authentication for this action');
+    }
 
     try {
         await admin.firestore().collection(Constant.collectionNames.THREADS).doc(threadInfo.threadId).update(threadInfo.data);
@@ -36,6 +44,10 @@ async function updateThread(threadInfo, context) {
 }
 
 async function deleteThread(threadId, context) {
+    if (!context.auth.token.email) {
+        if (Constant.DEV) console.log('Not allowed');
+        throw new functions.https.HttpsError('unauthenticated', 'User does not have the authentication for this action');
+    }
     try {
         await admin.firestore().collection(Constant.collectionNames.THREADS).doc(threadId).delete();
     } catch (e) {

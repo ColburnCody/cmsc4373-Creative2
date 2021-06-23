@@ -20,14 +20,9 @@ export function user_page() {
     Element.root.innerHTML = `
     <h1>Welcome, ${Auth.currentUser.email}</h1>
     <div>
-    <button id="button-change-password" class="btn btn-outline-info">Change password</button>
     <button id="button-delete-account" class="btn btn-outline-danger">Delete account</button>
     </div>
     `;
-
-    document.getElementById('button-change-password').addEventListener('click', () => {
-
-    })
 
     document.getElementById('button-delete-account').addEventListener('click', async () => {
         if (!window.confirm("Are you sure you want to delete your account?")) {
