@@ -28,6 +28,7 @@ export function addViewFormSubmitEvent(form) {
 }
 
 export async function thread_page(threadId) {
+
     if (!Auth.currentUser) {
         Element.root.innerHTML = '<h1>Protected page</h1>'
         return
@@ -108,7 +109,6 @@ export async function thread_page(threadId) {
             return;
         }
         EditThread.delete_thread(threadId);
-        window.history.back();
         Util.info('Deleted', 'Thread has been deleted');
     })
 
@@ -151,5 +151,5 @@ function buildReplyView(reply) {
             ${reply.content}
         </div>
         <hr>
-    `;
+    ` ;
 }

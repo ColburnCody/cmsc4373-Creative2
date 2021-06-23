@@ -71,7 +71,7 @@ export async function createAccount(email, password) {
 
 const cf_updateThread = firebase.functions().httpsCallable('cf_updateThread');
 export async function updateThread(thread) {
-    threadId = thread.threadId;
+    const threadId = thread.docId;
     const data = thread.serializeForUpdate();
     await cf_updateThread({ threadId, data });
 }

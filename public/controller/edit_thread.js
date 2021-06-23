@@ -2,7 +2,7 @@ import * as FirebaseController from './firebase_controller.js'
 import * as Util from '../viewpage/util.js'
 import * as Constant from '../model/constant.js'
 import * as Element from '../viewpage/element.js'
-import { Thread } from '../model/thread.js'
+import { Thread } from '../model/thread.js';
 
 
 export function addEventListeners() {
@@ -23,6 +23,8 @@ export function addEventListeners() {
             content: content,
             keywordsArray: keywordsArray,
         });
+
+        t.docId = e.target.threadId.value;
 
         let valid = true;
         let error = t.validate_title();
@@ -45,10 +47,9 @@ export function addEventListeners() {
             return;
         }
 
-        t.threadId = e.target.threadId.value;
-
         try {
             await FirebaseController.updateThread(t);
+            window.location.reload();
             Util.info('Thread has been updated', 'Your thread has been edited successfully', Element.modalEditThread);
         } catch (e) {
             if (Constant.DEV) console.log(e);
@@ -60,7 +61,7 @@ export function addEventListeners() {
 }
 
 export async function edit_thread(threadId) {
-    let thread
+    let thread;
     try {
         thread = await FirebaseController.getOneThread(threadId);
         if (!thread) {
@@ -73,10 +74,11 @@ export async function edit_thread(threadId) {
         return;
     }
 
-    Element.formEditThread.form.threadId.value = thread.threadId;
+    Element.formEditThread.form.threadId.value = thread.docId;
     Element.formEditThread.form.title.value = thread.title;
     Element.formEditThread.form.keywords.value = thread.keywordsArray;
     Element.formEditThread.form.content.value = thread.content;
+
     Element.modalEditThread.show();
 
 }
@@ -88,4 +90,5 @@ export async function delete_thread(threadId) {
         if (Constant.DEV) console.log(e);
         Util.info('Delete thread error', JSON.stringify(e));
     }
+    window.history.back();
 }
