@@ -60,7 +60,7 @@ export async function thread_page(threadId) {
         return;
     }
 
-    let html = Auth.currentUser.email != thread.email ? `
+    let html = Auth.currentUser.email == thread.email ? `
         <h4 class="bg-primary text-white">${thread.title}</h4>
         <div>${thread.email} (At ${new Date(thread.timestamp).toString()}</div>
         <div class="bg-secondary text-white">${thread.content}</div>

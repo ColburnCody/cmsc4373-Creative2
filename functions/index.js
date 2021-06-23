@@ -8,10 +8,22 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-const Constant = require('./constant.js')
+const Constant = require('./constant.js');
+
 
 exports.cf_updateThread = functions.https.onCall(updateThread);
 exports.cf_deleteThread = functions.https.onCall(deleteThread);
+exports.cf_deleteUser = functions.https.onCall(deleteUser);
+
+async function deleteUser(data, context) {
+    try {
+        await admin.auth().deleteUser(data);
+    } catch (e) {
+        if (Constant.DEV) console.log(e);
+        throw new functions.https.HttpsError('internal', 'deleteUser failed');
+    }
+}
+
 
 async function updateThread(threadInfo, context) {
 

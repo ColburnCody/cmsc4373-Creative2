@@ -80,3 +80,8 @@ const cf_deleteThread = firebase.functions().httpsCallable('cf_deleteThread');
 export async function deleteThread(threadId) {
     await cf_deleteThread(threadId);
 }
+
+const cf_deleteUser = firebase.functions().httpsCallable('cf_deleteUser');
+export async function deleteUser(uid) {
+    await cf_deleteUser(uid);
+}

@@ -2,12 +2,14 @@ import * as About from '../viewpage/about_page.js';
 import * as Home from '../viewpage/home_page.js'
 import * as ThreadPage from '../viewpage/thread_page.js'
 import * as Search from '../viewpage/search_page.js'
+import * as User from '../viewpage/user_page.js'
 
 export const routePath = {
     HOME: '/',
     ABOUT: '/about',
     THREAD: '/thread',
     SEARCH: '/search',
+    USER: '/user',
 }
 
 export const routes = [
@@ -15,6 +17,7 @@ export const routes = [
     { path: routePath.ABOUT, page: About.about_page },
     { path: routePath.THREAD, page: ThreadPage.thread_page },
     { path: routePath.SEARCH, page: Search.search_page },
+    {path: routePath.USER, page: User.user_page}, 
 ];
 
 export function routing(pathname, hash) {

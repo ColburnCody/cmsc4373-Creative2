@@ -4,12 +4,14 @@ import * as About from './viewpage/about_page.js'
 import * as Route from './controller/route.js'
 import * as Search from './viewpage/search_page.js'
 import * as EditThread from './controller/edit_thread.js'
+import * as User from './viewpage/user_page.js'
 
 Auth.addEventListeners();
 Home.addEventListeners();
 About.addEventListeners();
 Search.addEventListeners();
 EditThread.addEventListeners();
+User.addEventListeners();
 
 window.onload = () => {
     const pathname = window.location.pathname;
